@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+html, body{
+    background: #f3f4f6;
+}
+canvas{
+    border: solid 1px #cfcfcf;
+    border-radius: 5px;
+    margin: 10px auto;
+    display: block;
+    background: #fff;
+    border-bottom: solid 20px #ccc;
+}

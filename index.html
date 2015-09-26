@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Firm Prototype</title>
+
+    <link rel="stylesheet" href="Web/css/canvas.css">
+    <script src="Web/js/createjs-2015.05.21.min.js" type="text/javascript"></script>
+    <script src="Web/js/game.js" type="text/javascript"></script>
+</head>
+<body>
+<script>
+    var firm = new Game();
+
+    firm.load(function(core){
+        var stage = new createjs.Stage("firm");
+        var men = new Image();
+            men.src = core.getAnimation('clerkmen','walk');
+
+        var walk = new createjs.SpriteSheet({
+            images: [men],
+            "frames":{
+                width: 471,
+                height: 577
+            },
+            animations:{}
+        });
+
+        var animation = new createjs.Sprite(walk);
+            animation.y = 230;
+            animation.scaleX = animation.scaleY = 0.3;
+            animation.gotoAndPlay();
+
+            animation.walkToEnd = function(){
+                createjs.Tween.get(animation).to({x:1200},7000).call(function(){
+                    animation.x = 0;
+                    animation.walkToEnd();
+                })
+            };
+
+        stage.addChild(animation);
+        animation.walkToEnd();
+
+
+
+
+
+        createjs.Ticker.setFPS(50);
+        createjs.Ticker.addEventListener("tick",stage);
+    });
+
+
+</script>
+<canvas width="1200" height="400" id="firm"></canvas>
+</body>
+</html>
